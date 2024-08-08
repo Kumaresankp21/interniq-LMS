@@ -72,8 +72,6 @@ DATABASES = {
 }
 
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -128,3 +126,6 @@ STATICFILES_DIRS = [
  # important in deployment
  # after you run the command make sure you change the staticfiles dirs and static url 
  # to the one you spcify for static root for collectstatic commadn
+
+RAZORPAY_KEY_ID = "rzp_test_Ww4OsjzJZemylk"
+RAZORPAY_KEY_SECRET = "qUZTKo7pqNB6mBjhpsnUDlc4"

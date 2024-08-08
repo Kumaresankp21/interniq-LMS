@@ -1,9 +1,17 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from app.models import Categories,Course,Level,Video,UserCourse
+from app.models import Categories,Course,Level,Video,UserCourse,Payment
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.db.models import Sum
 from django.contrib import messages
+import razorpay
+from django.views.decorators.csrf import csrf_exempt
+from time import time 
+from . settings import RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET
+
+client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
+
+
 
 def BASE(request): 
 	return render(request, 'base.html')
@@ -133,7 +141,8 @@ def PAGE_NOT_FOUND(request):
 def CHECKOUT(request,slug):
 
 	course = Course.objects.get(slug=slug)
-
+	action = request.GET.get('action')
+	order = None
 
 	if course.price == 0:
 		course = UserCourse(
@@ -144,8 +153,90 @@ def CHECKOUT(request,slug):
 		messages.success(request, "Course are Successfully Enrolled")
 		return redirect('mycourse')
 
-	return render(request, "checkout/checkout.html")
+	elif action == 'create_payment':
+		if request.method == 'POST':
 
+			first_name = request.POST.get('billing_first_name')
+			last_name = request.POST.get('billing_last_name')
+			email = request.POST.get('billing_email')
+			phone = request.POST.get('billing_phone')
+			address_1 = request.POST.get('billing_address_1')
+			address_2 = request.POST.get('billing_address_2')
+			city = request.POST.get('billing_city')
+			state = request.POST.get('billing_state')
+			pincode = request.POST.get('billing_pincode')
+			order_comments = request.POST.get('order_comments')
+
+
+			amount_cal = course.price - (course.price * course.discount) / 100
+
+			amount = int(amount_cal) * 100
+			currency = 'INR'
+			receipt = f"internIQ{int(time())}"
+			notes = {
+			'email': email,
+			'name' : f"{first_name} {last_name}",
+			'phone': phone,
+			'address': f'{address_1} {address_2}',
+			'city': city,
+			'state': state,
+			'pincode': pincode,
+			'order_comments': order_comments,
+			}
+
+			order = client.order.create(
+			{'amount':amount, 
+			'currency':currency, 
+			'receipt':receipt, 
+			'notes':notes})
+
+			payment = Payment(
+				course = course,
+				user = request.user,
+				order_id = order['id'],)
+
+			payment.save()
+
+	context = {
+	'course': course,
+	'order': order,
+	}
+
+	return render(request, "checkout/checkout.html",context)
+
+@csrf_exempt
+def VERIFY_PAYMENT(request):
+	if request.method == 'POST':
+		data = request.POST
+		try:
+			client.utility.verify_payment_signature(data)
+			razorpay_order_id = data['razorpay_order_id']
+			razorpay_payment_id = data['razorpay_payment_id']
+			
+
+			payment = Payment.objects.get(order_id = razorpay_order_id)
+			payment.payment_id = razorpay_payment_id
+			payment.status = True
+			payment.save()
+
+			usercourse = UserCourse(
+				user = payment.user,
+				course = payment.course,
+				)
+			course.save()
+			payment.user_course = usercourse
+			payment.save()
+
+			context = {
+			'payment': payment,
+			'data': data,
+			}
+			return render(request, "verify_payment/success.html", context)
+
+		except:
+			return render(request, "verify_payment/fail.html")
+
+	return redirect('home')
 
 
 def MY_COURSE(request):

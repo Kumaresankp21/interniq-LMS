@@ -24,7 +24,8 @@ urlpatterns = [
     path('my-course',views.MY_COURSE,name='mycourse'),
     path('checkout/<slug:slug>',views.CHECKOUT,name='checkout'),
     path('course/watch-course/<slug:slug>',views.WATCH_COURSE,name='watch_course'),
-    path('internship/register',intern_views.REGISTER,name='intern_register')
+    path('internship/register',intern_views.REGISTER,name='intern_register'),
+    path('verify_payment',views.VERIFY_PAYMENT,name='verify_payment'),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 urlpatterns+= static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
