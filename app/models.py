@@ -115,7 +115,6 @@ class Lesson(models.Model):
 class Video(models.Model):
 
     serial_number = models.IntegerField(null=True)
-    thumbnail = models.ImageField (upload_to="Media/Yt_Thumbnail", null=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)

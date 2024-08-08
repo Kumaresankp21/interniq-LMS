@@ -149,12 +149,15 @@ def CHECKOUT(request,slug):
 
 
 def MY_COURSE(request):
-	course = UserCourse.objects.filter(user = request.user)
+	if request.user.is_authenticated:	
+		course = UserCourse.objects.filter(user = request.user)
 
-	context = {
-	'course': course
-	}
-	return render(request, "course/my_course.html",context)
+		context = {
+		'course': course
+		}
+		return render(request, "course/my_course.html",context)
+	else:
+		return redirect('login')
 
 
 
@@ -184,7 +187,7 @@ def WATCH_COURSE(request,slug):
 
 
 	context = {
-	'course':course,
+	'courseto':course,
 	'video':video,
 	'next_id': next_id,
 	'prev_id':prev_id
