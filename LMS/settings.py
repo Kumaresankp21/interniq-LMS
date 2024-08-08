@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'f60(3(65qt5_%lc92ebkg-p*&+46(9cyw$j3!6pna!9@hdthz2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['interniq2lms.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -29,8 +29,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
+        # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -113,7 +114,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
 
-STATICSTORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICSTORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # staticfiles_dirs is for your project html /css/javascript
 # static root is the where Django will collect all the

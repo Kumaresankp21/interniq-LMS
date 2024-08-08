@@ -118,7 +118,7 @@ class Video(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    youtube_id = models.CharField(max_length=200)
+    youtube_id = models.IntegerField(max_length=200)
     time_duration =  models.IntegerField (null=True)
     preview = models.BooleanField (default=False)
 

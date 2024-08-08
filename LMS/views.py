@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from app.models import Categories,Course,Level,Video,UserCourse
 from django.template.loader import render_to_string
 from django.http import JsonResponse
@@ -162,35 +162,46 @@ def MY_COURSE(request):
 
 
 
-def WATCH_COURSE(request,slug):
+def WATCH_COURSE(request, slug):
+    # Retrieve the course based on the slug
+    course = get_object_or_404(Course, slug=slug)
+    
+    # Get the lecture number from the request
+    lecture_number = request.GET.get('lecture')
+    if lecture_number:
+        try:
+            # Convert lecture_number to integer
+            lecture_number = int(lecture_number)
+            
+            # Retrieve the video based on course and serial number
+            video = Video.objects.filter(course=course, serial_number=lecture_number).first()
+            
+            if not video:
+                # If no video is found, redirect or handle accordingly
+                return redirect('404')  # Adjust according to your error handling
+        except ValueError:
+            # Handle invalid lecture_number format
+            return redirect('404')
+    else:
+        # Default to the first video if no lecture_number is provided
+        video = Video.objects.filter(course=course).order_by('serial_number').first()
+    
+    if video:
+        # Get the next and previous video IDs
+        next_video = Video.objects.filter(course=course, serial_number__gt=video.serial_number).order_by('serial_number').first()
+        prev_video = Video.objects.filter(course=course, serial_number__lt=video.serial_number).order_by('-serial_number').first()
 
-	course = Course.objects.filter(slug=slug)
-	next_id = 2
-	prev_id = 1
-	
+        next_id = next_video.serial_number if next_video else None
+        prev_id = prev_video.serial_number if prev_video else None
+    else:
+        next_id = None
+        prev_id = None
 
-	leccture = request.GET.get('lecture')
-	if leccture:
-		video = Video.objects.get(id=leccture)
-		next_id = int(leccture) + 1
-		prev_id = int(leccture) -1
-	else:
-		leccture = 1
+    context = {
+        'course': course,
+        'video': video,
+        'next_id': next_id,
+        'prev_id': prev_id,
+    }
 
-		video = Video.objects.get(id=leccture)
-	if course.exists():
-
-		course = course.first()
-	else:
-		return redirect('404') 
-
-
-
-	context = {
-	'courseto':course,
-	'video':video,
-	'next_id': next_id,
-	'prev_id':prev_id
-	}
-
-	return render(request, "course/watch-course.html",context)
+    return render(request, "course/watch-course.html", context)
