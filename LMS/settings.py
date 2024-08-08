@@ -14,8 +14,7 @@ SECRET_KEY = 'f60(3(65qt5_%lc92ebkg-p*&+46(9cyw$j3!6pna!9@hdthz2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['interniq-lms.onrender.com','localhost']
-
+ALLOWED_HOSTS = ['interniq-lms.onrender.com','interniq.tech']
 
 # Application definition
 
