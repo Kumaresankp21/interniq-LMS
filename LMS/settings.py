@@ -14,7 +14,7 @@ SECRET_KEY = 'f60(3(65qt5_%lc92ebkg-p*&+46(9cyw$j3!6pna!9@hdthz2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['interniq2lms.pythonanywhere.com','interniq.tech','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
