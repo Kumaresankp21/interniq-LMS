@@ -19,7 +19,7 @@ ALLOWED_HOSTS = ["*"]
 
 # DATABASE_URL = "postgresql://postgres:dYRIubOxBLskrVdsVFXOIJrqNvqJaWwW@viaduct.proxy.rlwy.net:50379/railway"
 
-CSRF_TRUSTED_ORIGINS= ["ttps://web-production-ebe0.up.railway.app"]
+CSRF_TRUSTED_ORIGINS= ["https://web-production-ebe0.up.railway.app"]
 
 # Application definition
 
