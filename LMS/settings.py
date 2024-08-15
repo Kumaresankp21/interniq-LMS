@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-import dj_database_url
+# import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -15,7 +15,7 @@ SECRET_KEY = 'f60(3(65qt5_%lc92ebkg-p*&+46(9cyw$j3!6pna!9@hdthz2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".vercel.app","now.sh","localhost","127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 
 # DATABASE_URL = "postgresql://postgres:dYRIubOxBLskrVdsVFXOIJrqNvqJaWwW@viaduct.proxy.rlwy.net:50379/railway"
 
@@ -36,7 +36,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
 
     'django.middleware.security.SecurityMiddleware',
-        # 'whitenoise.middleware.WhiteNoiseMiddleware',
+        'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,7 +122,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
 
-# STATICSTORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICSTORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # staticfiles_dirs is for your project html /css/javascript
 # static root is the where Django will collect all the
