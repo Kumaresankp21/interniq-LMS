@@ -17,8 +17,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [".vercel.app","now.sh","localhost","127.0.0.1"]
 
-DATABASE_URL = "postgresql://postgres:dYRIubOxBLskrVdsVFXOIJrqNvqJaWwW@viaduct.proxy.rlwy.net:50379/railway"
-
+# DATABASE_URL = "postgresql://postgres:dYRIubOxBLskrVdsVFXOIJrqNvqJaWwW@viaduct.proxy.rlwy.net:50379/railway"
 
 
 
@@ -70,15 +69,15 @@ WSGI_APPLICATION = 'LMS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 DATABASES = {
-    "default": dj_database_url.config(default=DATABASE_URL,conn_max_age=1800)
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+# DATABASES = {
+#     "default": dj_database_url.config(default=DATABASE_URL,conn_max_age=1800)
+# }
 
 
 # Password validation
@@ -138,5 +137,5 @@ STATICFILES_DIRS = [
 
 RAZORPAY_KEY_ID = "rzp_test_Ww4OsjzJZemylk"
 RAZORPAY_KEY_SECRET = "qUZTKo7pqNB6mBjhpsnUDlc4"
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'Media/')
