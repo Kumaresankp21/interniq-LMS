@@ -174,14 +174,15 @@
                 <h2 class="font-size-xl mb-4">{{ video.title }}</h2>
 
                 <div class="video-wrapper mb-4">
-                    <iframe src="https://player.vimeo.com/video/{{ video.youtube_id }}?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-                    frameborder="0"
-                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                    title="{{ video.title }}">
-            </iframe>
+                    <iframe src="https://www.youtube.com/embed/{{ video.youtube_id }}?autoplay=0&controls=1&modestbranding=1&rel=0"
+        frameborder="0"
+        allow="autoplay; encrypted-media; fullscreen"
+        title="{{ video.title }}">
+</iframe>
+
         </div>
 
-        <<div class="d-md-flex align-items-center justify-content-between mb-4">
+        <div class="d-md-flex align-items-center justify-content-between mb-4">
             <a href="?lecture={{ prev_id }}" class="btn btn-outline-primary mb-2 mb-md-0">
                 <i class="fa fa-chevron-left"></i> Previous Lecture
             </a>
