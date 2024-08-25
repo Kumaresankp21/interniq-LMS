@@ -235,7 +235,7 @@ def VERIFY_PAYMENT(request):
 				user = payment.user,
 				course = payment.course,
 				)
-			course.save()
+			usercourse.save()
 			payment.user_course = usercourse
 			payment.save()
 
@@ -243,9 +243,10 @@ def VERIFY_PAYMENT(request):
 			'payment': payment,
 			'data': data,
 			}
-			return render(request, "verify_payment/success.html", context)
+			return render(request, "verify_payment/sucess.html", context)
 
-		except:
+		except Exception as e:
+			print(e)
 			return render(request, "verify_payment/fail.html")
 
 	return redirect('home')

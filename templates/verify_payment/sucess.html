@@ -1,1 +1,23 @@
-<h1>Order are sucessfyk</h1>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Payment Successful!</h4>
+        <p>Thank you for your payment! Your payment for the course has been processed successfully.</p>
+    </div>
+
+    <h2 class="mt-4">Payment Details:</h2>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>User:</strong> {{ payment.user}}</li>
+        <li class="list-group-item"><strong>Course:</strong> {{ payment.course.title }}</li>
+        <li class="list-group-item"><strong>Order ID:</strong> {{ payment.order_id }}</li>
+        <li class="list-group-item"><strong>Payment ID:</strong> {{ payment.payment_id }}</li>
+        <li class="list-group-item"><strong>Status:</strong> {% if payment.status %} Completed {% else %} Pending {% endif %}</li>
+        <li class="list-group-item"><strong>Date:</strong> {{ payment.date }}</li>
+    </ul>
+    
+    <!-- View Course Button -->
+    <a href="{% url 'mycourse' %}" class="btn btn-primary mt-4">View My Courses</a>
+</div>
+{% endblock %}

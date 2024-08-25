@@ -1,1 +1,13 @@
-<h1>Order are fail</h1>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Payment Failed!</h4>
+        <p>We're sorry, but your payment could not be processed. Please try again or contact support if the problem persists.</p>
+    </div>
+
+    <!-- Back to Home Button -->
+    <a href="{% url 'home' %}" class="btn btn-primary mt-4">Back to Home</a>
+</div>
+{% endblock %}
