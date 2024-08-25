@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from app.models import Categories,Course,Level,Video,UserCourse,Payment
+from app.models import Categories,Course,Level,Video,UserCourse,Payment,Blog
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.db.models import Sum
@@ -17,14 +17,26 @@ def BASE(request):
 	return render(request, 'base.html')
 
 
-def HOME(request): 
-	category = Categories.objects.all().order_by('id')[0:5]
-	course = Course.objects.filter(status='PUBLISH').order_by('id')
-	context = {
-	'category': category,
-	'course': course
-	}
-	return render(request, 'Main/home.html',context)
+
+def HOME(request):
+    # Fetch categories
+    category = Categories.objects.all().order_by('id')[:5]
+    
+    # Fetch published courses
+    course = Course.objects.filter(status='PUBLISH').order_by('id')
+    
+    # Fetch latest blog posts (you can modify this query to suit your needs)
+    blogs = Blog.objects.all().order_by('-created_at')[:5]
+
+    # Pass data to the context
+    context = {
+        'category': category,
+        'course': course,
+        'blogs': blogs,
+    }
+    
+    return render(request, 'Main/home.html', context)
+
 
 
 def SINGLE_COURSE(request): 
@@ -296,3 +308,12 @@ def WATCH_COURSE(request, slug):
     }
 
     return render(request, "course/watch-course.html", context)
+
+
+def blog_detail(request, slug):
+    blogs = get_object_or_404(Blog, slug=slug)
+    return render(request, 'Pages/page.html', {'blogs': blogs})
+
+def PAGES_ALL(request):
+    blogs = Blog.objects.all() 
+    return render(request, 'Pages/all_pages.html', {'blogs': blogs})

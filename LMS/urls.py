@@ -26,6 +26,9 @@ urlpatterns = [
     path('course/watch-course/<slug:slug>',views.WATCH_COURSE,name='watch_course'),
     path('internship/register',intern_views.REGISTER,name='intern_register'),
     path('verify_payment',views.VERIFY_PAYMENT,name='verify_payment'),
+    path('page/<slug:slug>/', views.blog_detail, name='blog_detail'),
+    path('pages',views.PAGES_ALL,name='blog_list'),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 urlpatterns+= static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -121,6 +123,9 @@ STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
+# settings.py
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 STATICSTORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
