@@ -29,6 +29,9 @@ urlpatterns = [
     path('page/<slug:slug>/', views.blog_detail, name='blog_detail'),
     path('pages',views.PAGES_ALL,name='blog_list'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('terms-and-condition',views.TERMS_CONDITOIN,name='terms-and-condition'),
+    path('refund-policy',views.REFUND,name='refund'),
+    path('cancellation-policy',views.CANCELLATION,name='cancellation'),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 urlpatterns+= static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

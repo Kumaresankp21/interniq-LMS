@@ -318,3 +318,12 @@ def blog_detail(request, slug):
 def PAGES_ALL(request):
     blogs = Blog.objects.all() 
     return render(request, 'Pages/all_pages.html', {'blogs': blogs})
+
+def TERMS_CONDITOIN(request):
+	return render(request,'Policy/terms-and-condition.html')
+
+def REFUND(request):
+	return render(request,'Policy/refund.html')
+
+def CANCELLATION(request):
+	return render(request,'Policy/cancellation.html')
