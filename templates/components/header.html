@@ -45,7 +45,7 @@
                                 <div class="dropdown-menu-md bg-primary rounded dropdown-menu-inner">
 
                                     {% for i in cat.course_set.all %}
-                                    <a class="dropdown-item" href="course-single-v1.html">
+                                    <a class="dropdown-item" href="/course/{{i.slug}}">
                                         {{i.title}}
                                     </a>
                                     {%endfor%}

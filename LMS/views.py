@@ -327,3 +327,6 @@ def REFUND(request):
 
 def CANCELLATION(request):
 	return render(request,'Policy/cancellation.html')
+
+def PRIVACY(request):
+	return render(request,'Policy/privacy-policy.html')
