@@ -421,14 +421,14 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
         var options = {
-            "key": "rzp_test_Ww4OsjzJZemylk",
+            "key": "rzp_live_RvwgWBLbXMIzK9",
             "amount": "{{order.amount}}",
             "currency": "INR",
             "name": "internIQ Course",
             "description": "Payment for {{course.title}}",
             "image": "https://example.com/your_logo.jpg",
             "order_id": "{{order.id}}",
-            "callback_url": "https://interniq.live/verify_payment",
+            "callback_url": "https://www.interniq.live/verify_payment",
             "prefill": {
                 "name": "{{order.notes.name}}",
                 "email": "{{order.notes.email}}",
