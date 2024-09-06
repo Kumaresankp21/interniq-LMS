@@ -140,7 +140,7 @@ STATICSTORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
  # after you run the command make sure you change the staticfiles dirs and static url 
  # to the one you spcify for static root for collectstatic commadn
 
-RAZORPAY_KEY_ID = "rzp_test_Ww4OsjzJZemylk"
-RAZORPAY_KEY_SECRET = "qUZTKo7pqNB6mBjhpsnUDlc4"
+RAZORPAY_KEY_ID = "rzp_live_RvwgWBLbXMIzK9"
+RAZORPAY_KEY_SECRET = "UNPq3vzVxcO70YGhZIWIz9lB"
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'Media/')
