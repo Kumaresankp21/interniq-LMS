@@ -29,7 +29,8 @@
       <meta name="keywords" content="internships in Chennai, courses in Chennai, Chennai internships, Chennai courses, IT internships Chennai, engineering internships Chennai, web development courses Chennai, online courses Chennai, internIQ live">
       <meta name="author" content="internIQ">
       <meta name="robots" content="index, follow">
-      <link rel="canonical" href="https://www.interniq.live">
+      <link rel="canonical" href="{% if canonical_url %}{{ canonical_url }}{% else %}{{ request.build_absolute_uri }}{% endif %}">
+    
       <meta property="og:title" content="Internships and Courses in Chennai | Build Your Career with internIQ">
       <meta property="og:description" content="Join internIQ to find the best internships and courses in Chennai. Enhance your skills and get real-world experience with our expert-led programs.">
       <meta property="og:url" content="https://www.interniq.live">

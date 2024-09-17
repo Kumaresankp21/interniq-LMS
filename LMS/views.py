@@ -13,7 +13,11 @@ client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
 
 
 
-def BASE(request): 
+def BASE(request):
+	canonical_url = request.build_absolute_uri()
+	context = {
+		'canonical_url':canonical_url,
+	}
 	return render(request, 'base.html')
 
 
