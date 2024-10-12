@@ -3,4 +3,4 @@ User-agent: *
 Disallow: 
 Disallow: /cgi-bin/
 Disallow: /admin/
-Sitemap: https://www.interniq.live/sitemap.xml
+Sitemap: https://interniq.live/sitemap.xml
